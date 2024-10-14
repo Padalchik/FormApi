@@ -16,11 +16,33 @@ namespace FormApi.Controllers
             _formService = formService;
         }
 
+
         [HttpPost("{candidateId:guid}")]
         public async Task<ActionResult<Guid>> CreateForm(Guid candidateId)
         {
             var formId = await _formService.CreateForm(candidateId);
             return Ok(formId);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Form>>> GetCandidates()
+        {
+            var allForm = await _formService.GetAllForm();
+
+            return Ok(allForm);
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<Form>> GetCandidateById(Guid id)
+        {
+            var form = await _formService.GetFormById(id);
+            return Ok(form);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult<Guid>> DeleteForm(Guid id)
+        {
+            return Ok(await _formService.DeleteForm(id));
         }
     }
 }
