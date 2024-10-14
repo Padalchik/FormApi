@@ -36,9 +36,17 @@ namespace FormApi.Repositories
 
         public async Task<Guid> Delete(Guid id)
         {
-            await _context.Forms.Where(c => c.Id == id).ExecuteDeleteAsync();
+            var formsToDelete = _context.Forms.Where(c => c.Id == id);
 
-            return id;
+            if (formsToDelete.Any())
+            {
+                await formsToDelete.ExecuteDeleteAsync();
+                return id;
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
     }
 }

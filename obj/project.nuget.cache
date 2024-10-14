@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mKrgz3f6bNE=",
+  "dgSpecHash": "ZvfwIZtOrSs=",
   "success": true,
-  "projectFilePath": "C:\\VisualStudioProjects\\FormApi\\FormApi\\FormApi.csproj",
+  "projectFilePath": "C:\\VisualStudioProjects\\FormApi\\FormApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Andrey\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Andrey\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
