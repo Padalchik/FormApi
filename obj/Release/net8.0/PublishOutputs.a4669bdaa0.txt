@@ -1,0 +1,16 @@
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\FormApi.exe
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\FormApi.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\FormApi.runtimeconfig.json
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\FormApi.pdb
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Relational.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Npgsql.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\VisualStudioProjects\FormApi\FormApi\obj\Release\net8.0\PubTmp\Out\FormApi.deps.json
