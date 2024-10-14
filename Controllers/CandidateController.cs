@@ -27,7 +27,7 @@ namespace FormApi.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<List<CandidateResponse>>> GetCandidateById(Guid id)
+        public async Task<ActionResult<CandidateResponse>> GetCandidateById(Guid id)
         {
             var candidate = await _candidatesService.GetCandidateById(id);
 

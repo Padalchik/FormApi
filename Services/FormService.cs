@@ -27,5 +27,20 @@ namespace FormApi.Services
 
             return await _formRepository.Create(createRequest.Form);
         }
+
+        public async Task<Guid> DeleteForm(Guid id)
+        {
+            return await _formRepository.Delete(id);
+        }
+
+        public async Task<List<Form>> GetAllForm()
+        {
+            return await _formRepository.Get();
+        }
+
+        public async Task<Form> GetFormById(Guid id)
+        {
+            return await _formRepository.GetFormById(id);
+        }
     }
 }
