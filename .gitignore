@@ -31,6 +31,7 @@ bld/
 
 # Visual Studio Code workspace
 .vscode/
+.vs/
 
 # NuGet Packages
 *.nupkg
