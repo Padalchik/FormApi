@@ -19,9 +19,10 @@ namespace FormApi.Repositories
             return allForm;
         }
 
-        public async Task<Form> GetFormById(Guid FormId)
+        public async Task<Form> GetFormById(Guid formId)
         {
-            var form = await _context.Forms.FindAsync(FormId);
+            //var form = await _context.Forms.FindAsync(formId);
+            var form = await _context.Forms.Include(f => f.PhoneRecords).FirstOrDefaultAsync(f => f.Id == formId); 
 
             return form;
         }
@@ -47,6 +48,12 @@ namespace FormApi.Repositories
             {
                 throw new Exception();
             }
+        }
+
+        public async Task Update(Form form)
+        {
+            _context.Forms.Update(form);
+            await _context.SaveChangesAsync();
         }
     }
 }

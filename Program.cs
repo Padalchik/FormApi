@@ -24,8 +24,12 @@ namespace FormApi
 
             builder.Services.AddScoped<ICandidatesService, CandidatesService>();
             builder.Services.AddScoped<ICandidatesRepository, CandidatesRepository>();
+
             builder.Services.AddScoped<IFormService, FormService>();
             builder.Services.AddScoped<IFormRepository, FormRepository>();
+
+            builder.Services.AddScoped<IPhoneRecordService, PhoneRecordService>();
+            builder.Services.AddScoped<IPhoneRecordRepository, PhoneRecordRepository>();
 
             var app = builder.Build();
 

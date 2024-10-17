@@ -23,6 +23,12 @@ namespace FormApi.Entities
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
+        public List<PhoneRecord> PhoneRecords { get; set; } = new List<PhoneRecord>();
+
+        public void AddPhoneRecord(PhoneRecord record)
+        {
+            PhoneRecords.Add(record);
+        }
 
         public static (Form Form, string Error) Create(Candidate candidate)
         {
