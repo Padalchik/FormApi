@@ -8,5 +8,6 @@ namespace FormApi.Repositories
         Task<Form> GetFormById(Guid id);
         Task<Guid> Create(Form Form);
         Task<Guid> Delete(Guid id);
+        Task Update(Form form);
     }
 }
