@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace FormApi.Entities
 {
     public class Form
@@ -23,7 +25,7 @@ namespace FormApi.Entities
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string MiddleName { get; set; } = string.Empty;
-        public List<PhoneRecord> PhoneRecords { get; set; } = new List<PhoneRecord>();
+        public virtual List<PhoneRecord> PhoneRecords { get; set; } = new List<PhoneRecord>();
 
         public void AddPhoneRecord(PhoneRecord record)
         {

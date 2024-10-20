@@ -21,9 +21,7 @@ namespace FormApi.Repositories
 
         public async Task<Form> GetFormById(Guid formId)
         {
-            //var form = await _context.Forms.FindAsync(formId);
-            var form = await _context.Forms.Include(f => f.PhoneRecords).FirstOrDefaultAsync(f => f.Id == formId); 
-
+            var form = await _context.Forms.FindAsync(formId);
             return form;
         }
 

@@ -13,5 +13,11 @@ namespace FormApi
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Form> Forms { get; set; }
         public DbSet<PhoneRecord> PhoneRecords { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Включаем Lazy Loading Proxies
+            optionsBuilder.UseLazyLoadingProxies();
+        }
     }
 }
