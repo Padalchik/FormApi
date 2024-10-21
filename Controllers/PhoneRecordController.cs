@@ -27,5 +27,12 @@ namespace FormApi.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("delete-phone-record")]
+        public async Task<ActionResult> DeletePhoneRecord([FromBody] DeletePhoneRecordRequest request)
+        {
+            await _phoneRecordService.DeletePhoneRecordFromForm(request.FormId, request.PhoneRecordId);
+            return Ok();
+        }
     }
 }
