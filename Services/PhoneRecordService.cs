@@ -27,6 +27,19 @@ namespace FormApi.Services
             await _formRepository.Update(form);
         }
 
+        public Task DeletePhoneRecordFromForm(Guid formId, Guid phoneRecordId)
+        {
+            var form = _formRepository.GetFormById(formId).Result;
+
+            var allPhoneRecordId = form.PhoneRecords.Select(pr => pr.Id);
+            var searchedphoneRecords = allPhoneRecordId.Where(o => o == phoneRecordId);
+
+            if (searchedphoneRecords.Any())
+                searchedphoneRecords.ToList().ForEach(o => _phoneRecordRepository.Delete(o));
+
+            return Task.CompletedTask;
+        }
+
         private async Task<PhoneRecord> CreatePhoneRecord(Guid formId, string phoneNumber, PhoneType type, string model)
         {
             var createRequest = PhoneRecord.Create(formId, phoneNumber, type, model);
