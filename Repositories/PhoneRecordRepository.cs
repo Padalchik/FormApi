@@ -22,7 +22,7 @@ namespace FormApi.Repositories
 
         public async Task<Guid> Delete(Guid id)
         {
-            var phoneRecordToDelete = _context.Forms.Where(c => c.Id == id);
+            var phoneRecordToDelete = _context.PhoneRecords.Where(c => c.Id == id);
 
             if (phoneRecordToDelete.Any())
             {
