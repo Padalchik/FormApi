@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormApi", "FormApi.csproj", "{D2563D67-C249-45DD-8B27-5F4CEA4CEDB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2563D67-C249-45DD-8B27-5F4CEA4CEDB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2563D67-C249-45DD-8B27-5F4CEA4CEDB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2563D67-C249-45DD-8B27-5F4CEA4CEDB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2563D67-C249-45DD-8B27-5F4CEA4CEDB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0559F13E-FC8F-430C-9D2E-67589B11ECAE}
+	EndGlobalSection
+EndGlobal
