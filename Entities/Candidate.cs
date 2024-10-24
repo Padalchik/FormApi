@@ -2,6 +2,11 @@
 {
     public class Candidate
     {
+        public Candidate()
+        {
+            
+        }
+
         private Candidate(string firstName, string lastName, string middleName)
         {
             Id = Guid.NewGuid();

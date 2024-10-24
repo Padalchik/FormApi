@@ -1,6 +1,6 @@
 ﻿using FormApi.Entities;
 
-namespace FormApi.Repositories
+namespace FormApi.Abstractions
 {
     public interface IFormRepository
     {

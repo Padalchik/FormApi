@@ -1,6 +1,6 @@
 ﻿using FormApi.Entities;
 
-namespace FormApi.Services
+namespace FormApi.Abstractions
 {
     public interface IFormService
     {
