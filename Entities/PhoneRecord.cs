@@ -1,4 +1,6 @@
-﻿namespace FormApi.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace FormApi.Entities
 {
     public class PhoneRecord
     {
@@ -17,6 +19,8 @@
         public Guid Id { get; set; }
         public Guid OwnerId { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public PhoneType Type { get; set; }
         public string Model { get; set; } = string.Empty;
 

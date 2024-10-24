@@ -13,6 +13,7 @@ namespace FormApi
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Form> Forms { get; set; }
         public DbSet<PhoneRecord> PhoneRecords { get; set; }
+        public DbSet<Relative> Relatives { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
