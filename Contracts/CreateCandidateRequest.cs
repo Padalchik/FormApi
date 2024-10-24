@@ -1,6 +1,6 @@
 ﻿namespace FormApi.Contracts
 {
-    public record CandidateRequest(
+    public record CreateCandidateRequest(
        string firstName,
        string lastName,
        string middleName);

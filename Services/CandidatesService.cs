@@ -1,5 +1,5 @@
-﻿using FormApi.Repositories;
-using FormApi.Entities;
+﻿using FormApi.Entities;
+using FormApi.Abstractions;
 
 namespace FormApi.Services
 {

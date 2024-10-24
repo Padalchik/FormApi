@@ -1,6 +1,9 @@
+using FormApi.Abstractions;
 using FormApi.Repositories;
 using FormApi.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace FormApi
 {
@@ -30,6 +33,15 @@ namespace FormApi
 
             builder.Services.AddScoped<IPhoneRecordService, PhoneRecordService>();
             builder.Services.AddScoped<IPhoneRecordRepository, PhoneRecordRepository>();
+
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.ExampleFilters();
+            });
+            builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
+
+            builder.Services.AddApiVersioning();
 
             var app = builder.Build();
 

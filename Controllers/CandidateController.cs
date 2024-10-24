@@ -1,7 +1,9 @@
-﻿using FormApi.Contracts;
+﻿using FormApi.Abstractions;
+using FormApi.Contracts;
+using FormApi.Contracts.Examples;
 using FormApi.Entities;
-using FormApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace FormApi.Controllers
 {
@@ -37,7 +39,8 @@ namespace FormApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateCandidate([FromBody] CandidateRequest request)
+        [SwaggerRequestExample(typeof(CreateCandidateRequest), typeof(CreateCandidateRequestExample))]
+        public async Task<ActionResult<Guid>> CreateCandidate([FromBody] CreateCandidateRequest request)
         {
             var (candidate, error) = Candidate.Create(
                 request.firstName,
@@ -53,7 +56,7 @@ namespace FormApi.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Guid>> UpdateCandidate(Guid id, [FromBody] CandidateRequest request )
+        public async Task<ActionResult<Guid>> UpdateCandidate(Guid id, [FromBody] CreateCandidateRequest request )
         {
             var candidateId = await _candidatesService.UpdateCandidate(id, request.firstName, request.lastName, request.middleName);
 
