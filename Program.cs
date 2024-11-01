@@ -32,9 +32,12 @@ namespace FormApi
             builder.Services.AddScoped<IPhoneRecordService, PhoneRecordService>();
             builder.Services.AddScoped<IPhoneRecordRepository, PhoneRecordRepository>();
 
+            builder.Services.AddScoped<IRelativeService, RelativeService>();
+            builder.Services.AddScoped<IRelativeRepository, RelativeRepository>();
+
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "veeerrsionnnnn1" });
                 c.ExampleFilters();
             });
             builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();

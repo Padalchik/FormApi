@@ -1,4 +1,5 @@
 ﻿
+using FormApi.Mappers;
 using System.Text.Json.Serialization;
 
 namespace FormApi.Entities
@@ -27,9 +28,24 @@ namespace FormApi.Entities
         public string MiddleName { get; set; } = string.Empty;
         public virtual List<PhoneRecord> PhoneRecords { get; set; } = new List<PhoneRecord>();
 
+        public virtual List<Relative> Relatives { get; set; } = new List<Relative>();
+
         public void AddPhoneRecord(PhoneRecord record)
         {
             PhoneRecords.Add(record);
+        }
+
+        public Guid AddRelative(Models.Relative relative)
+        {
+            var relativeEntity = RelativeMapper.ToEntity(relative);
+
+            //relativeEntity.Id = Guid.NewGuid();
+            relativeEntity.OwnerId = Id;
+            relativeEntity.CreatedDate = DateTime.Now.ToUniversalTime();
+
+            Relatives.Add(relativeEntity);
+
+            return relativeEntity.Id;
         }
 
         public static (Form Form, string Error) Create(Candidate candidate)

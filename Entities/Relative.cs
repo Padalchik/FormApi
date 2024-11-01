@@ -6,7 +6,6 @@ namespace FormApi.Entities
     {
         public Relative()
         {
-            
         }
 
         public Guid Id { get; set; }
