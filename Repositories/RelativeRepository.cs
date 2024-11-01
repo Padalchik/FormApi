@@ -1,7 +1,6 @@
 ﻿using FormApi.Abstractions;
 using FormApi.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace FormApi.Repositories
 {
@@ -13,6 +12,15 @@ namespace FormApi.Repositories
         {
             _context = dbcontext;
         }
+
+        public async Task<Guid> CreateRelative (Relative relative)
+        {
+            await _context.Relatives.AddAsync(relative);
+            await _context.SaveChangesAsync();
+
+            return relative.Id;
+        }
+
         public async Task<List<Relative>> Get()
         {
             var allRelatives = await _context.Relatives.ToListAsync();

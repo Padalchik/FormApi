@@ -17,7 +17,10 @@ namespace FormApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -101,6 +104,46 @@ namespace FormApi.Migrations
                     b.ToTable("PhoneRecords");
                 });
 
+            modelBuilder.Entity("FormApi.Entities.Relative", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("FormId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("RelativeType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("Relatives");
+                });
+
             modelBuilder.Entity("FormApi.Entities.PhoneRecord", b =>
                 {
                     b.HasOne("FormApi.Entities.Form", null)
@@ -108,9 +151,18 @@ namespace FormApi.Migrations
                         .HasForeignKey("FormId");
                 });
 
+            modelBuilder.Entity("FormApi.Entities.Relative", b =>
+                {
+                    b.HasOne("FormApi.Entities.Form", null)
+                        .WithMany("Relatives")
+                        .HasForeignKey("FormId");
+                });
+
             modelBuilder.Entity("FormApi.Entities.Form", b =>
                 {
                     b.Navigation("PhoneRecords");
+
+                    b.Navigation("Relatives");
                 });
 #pragma warning restore 612, 618
         }
