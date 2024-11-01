@@ -4,6 +4,7 @@ using FormApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Text.Json.Serialization;
 
 namespace FormApi
 {
@@ -13,10 +14,7 @@ namespace FormApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -34,12 +32,20 @@ namespace FormApi
             builder.Services.AddScoped<IPhoneRecordService, PhoneRecordService>();
             builder.Services.AddScoped<IPhoneRecordRepository, PhoneRecordRepository>();
 
+            builder.Services.AddScoped<IRelativeService, RelativeService>();
+            builder.Services.AddScoped<IRelativeRepository, RelativeRepository>();
+
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "veeerrsionnnnn1" });
                 c.ExampleFilters();
             });
             builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
+
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             builder.Services.AddApiVersioning();
 
