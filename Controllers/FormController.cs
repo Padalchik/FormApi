@@ -25,7 +25,7 @@ namespace FormApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Form>>> GetAllForm()
+        public async Task<ActionResult<List<FormEntity>>> GetAllForm()
         {
             var allForm = await _formService.GetAllForm();
 
@@ -33,7 +33,7 @@ namespace FormApi.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<Form>> GetFormById(Guid id)
+        public async Task<ActionResult<FormEntity>> GetFormById(Guid id)
         {
             var form = await _formService.GetFormById(id);
             return Ok(form);

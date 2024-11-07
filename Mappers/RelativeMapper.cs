@@ -18,7 +18,7 @@ namespace FormApi.Mappers
             return relativeEntity;
         }
 
-        public static Models.Relative ToModel(Form form, Entities.Relative relativeEntity)
+        public static Models.Relative ToModel(FormEntity form, Entities.Relative relativeEntity)
         {
             var relativeModel = new Models.Relative(form, relativeEntity.FirstName, relativeEntity.LastName, relativeEntity.MiddleName, relativeEntity.RelativeType);
 

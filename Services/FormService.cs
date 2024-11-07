@@ -1,5 +1,7 @@
 ﻿using FormApi.Abstractions;
 using FormApi.Entities;
+using FormApi.Mappers;
+using FormApi.Models;
 
 namespace FormApi.Services
 {
@@ -20,12 +22,9 @@ namespace FormApi.Services
         public async Task<Guid> CreateForm(Guid candidateId)
         {
             var candidate = await _candidatesService.GetCandidateById( candidateId );
-            var createRequest = Form.Create(candidate);
+            var form = new FormModel(candidate);
 
-            if (!string.IsNullOrEmpty(createRequest.Error))
-                throw new InvalidOperationException();
-
-            return await _formRepository.Create(createRequest.Form);
+            return await _formRepository.Create(FormMapper.ToEntity(form));
         }
 
         public async Task<Guid> DeleteForm(Guid id)
@@ -33,12 +32,12 @@ namespace FormApi.Services
             return await _formRepository.Delete(id);
         }
 
-        public async Task<List<Form>> GetAllForm()
+        public async Task<List<FormEntity>> GetAllForm()
         {
             return await _formRepository.Get();
         }
 
-        public async Task<Form> GetFormById(Guid id)
+        public async Task<FormEntity> GetFormById(Guid id)
         {
             return await _formRepository.GetFormById(id);
         }

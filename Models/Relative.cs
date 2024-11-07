@@ -5,13 +5,13 @@ namespace FormApi.Models
 {
     public class Relative : Person
     {
-        public Relative(Form form, string firstName, string lastName, string middleName, RelativeType relativeType) : base(firstName, lastName, middleName)
+        public Relative(FormEntity form, string firstName, string lastName, string middleName, RelativeType relativeType) : base(firstName, lastName, middleName)
         {
             Form = form;
             RelativeType = relativeType;
         }
 
-        public Form Form { get; set; }
+        public FormEntity Form { get; set; }
         public RelativeType RelativeType { get; private set; }
     }
 
