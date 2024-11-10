@@ -5,7 +5,6 @@ namespace FormApi.Models
 {
     public class RelativeModel : Person
     {
-
         public static (RelativeModel? RelativeModel, string Error) Create(FormModel form, Dictionary<string, object> relativeParams)
         {
             List<string> errors = [];
@@ -48,7 +47,6 @@ namespace FormApi.Models
 
             return (relativeModel, error);
         }
-
 
         public FormModel Form { get; set; }
         public RelativeType RelativeType { get; private set; }
