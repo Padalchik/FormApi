@@ -28,6 +28,8 @@ namespace FormApi.Repositories
 
         public async Task<Guid> Create(FormEntity form)
         {
+            form.CreateDate = DateTime.UtcNow;
+
             await _context.Forms.AddAsync(form);
             await _context.SaveChangesAsync();
 

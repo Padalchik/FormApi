@@ -4,8 +4,9 @@ namespace FormApi.Abstractions
 {
     public interface IRelativeRepository
     {
-        Task<List<Relative>> Get();
-        Task<Relative> GetRelativeById(Guid id);
-        Task<List<Relative>> GetRelativesByOwnerId(Guid id);
+        Task<Guid> CreateRelative(RelativeEntity relative);
+        Task<List<RelativeEntity>> Get();
+        Task<RelativeEntity> GetRelativeById(Guid id);
+        Task<List<RelativeEntity>> GetRelativesByForm(FormEntity form);
     }
 }

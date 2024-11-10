@@ -27,9 +27,9 @@ namespace FormApi.Services
             return await _formRepository.Create(FormMapper.ToEntity(form));
         }
 
-        public async Task<Guid> DeleteForm(Guid id)
+        public async Task DeleteForm(Guid id)
         {
-            return await _formRepository.Delete(id);
+            await _formRepository.Delete(id);
         }
 
         public async Task<List<FormEntity>> GetAllForm()

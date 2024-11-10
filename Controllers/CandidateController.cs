@@ -43,9 +43,9 @@ namespace FormApi.Controllers
         public async Task<ActionResult<Guid>> CreateCandidate([FromBody] CreateCandidateRequest request)
         {
             var (candidate, error) = Candidate.Create(
-                request.firstName,
-                request.lastName,
-                request.middleName);
+                request.FirstName,
+                request.LastName,
+                request.MiddleName);
 
             if (!string.IsNullOrEmpty(error))
                 return BadRequest(error);
@@ -58,7 +58,7 @@ namespace FormApi.Controllers
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<Guid>> UpdateCandidate(Guid id, [FromBody] CreateCandidateRequest request )
         {
-            var candidateId = await _candidatesService.UpdateCandidate(id, request.firstName, request.lastName, request.middleName);
+            var candidateId = await _candidatesService.UpdateCandidate(id, request.FirstName, request.LastName, request.MiddleName);
 
             return Ok(candidateId);
         }

@@ -5,16 +5,16 @@ namespace FormApi.Models
 {
     public class FormModel : Person
     {
-        private Candidate _candidate;
+        
         private List<PhoneRecord> _phoneRecords = new List<PhoneRecord>();
-        private List<Relative> _relatives       = new List<Relative>();
+        private List<RelativeModel> _relatives       = new List<RelativeModel>();
 
         public FormModel(Candidate candidate) : base(candidate.FirstName, candidate.LastName, candidate.MiddleName)
         {
-            _candidate    = candidate;
+            Candidate    = candidate;
         }
-
-        public IReadOnlyList<Relative> Relatives => _relatives.AsReadOnly();
+        public Candidate Candidate { get; private set; }
+        public IReadOnlyList<RelativeModel> Relatives => _relatives.AsReadOnly();
         public IReadOnlyList<PhoneRecord> PhoneRecords => _phoneRecords.AsReadOnly();
 
         public void AddPhoneRecord(PhoneRecord record)
@@ -22,7 +22,7 @@ namespace FormApi.Models
             _phoneRecords.Add(record);
         }
 
-        public void AddRelative(Models.Relative relative)
+        public void AddRelative(Models.RelativeModel relative)
         {
             _relatives.Add(relative);
         }

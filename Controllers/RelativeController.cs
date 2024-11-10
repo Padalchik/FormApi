@@ -17,12 +17,18 @@ namespace FormApi.Controllers
         }
 
         [HttpPut("CreateRelative")]
-
         [SwaggerRequestExample(typeof(CreateRelativeRequest), typeof(CreateRelativeRequestExample))]
-
         public async Task<ActionResult> CreateRelative([FromBody] CreateRelativeRequest request)
         {
-            var relativeId = await _relativeService.CreateRelative(request.FormId, request.FirstName, request.LastName, request.MiddleName, request.relativeType);
+            var createRelativeParams = new Dictionary<string, object>
+            {
+                { "FirstName", request.FirstName },
+                { "LastName", request.LastName },
+                { "MiddleName", request.MiddleName },
+                { "RelativeType", request.relativeType }
+            };
+
+            var relativeId = await _relativeService.CreateRelative(request.FormId, createRelativeParams);
 
             return Ok(relativeId);
         }

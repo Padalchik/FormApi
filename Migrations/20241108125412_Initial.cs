@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FormApi.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,11 +33,18 @@ namespace FormApi.Migrations
                     CandidateId = table.Column<Guid>(type: "uuid", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
-                    MiddleName = table.Column<string>(type: "text", nullable: false)
+                    MiddleName = table.Column<string>(type: "text", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Forms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Forms_Candidates_CandidateId",
+                        column: x => x.CandidateId,
+                        principalTable: "Candidates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,14 +56,14 @@ namespace FormApi.Migrations
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
                     Model = table.Column<string>(type: "text", nullable: false),
-                    FormId = table.Column<Guid>(type: "uuid", nullable: true)
+                    FormEntityId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PhoneRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PhoneRecords_Forms_FormId",
-                        column: x => x.FormId,
+                        name: "FK_PhoneRecords_Forms_FormEntityId",
+                        column: x => x.FormEntityId,
                         principalTable: "Forms",
                         principalColumn: "Id");
                 });
@@ -73,35 +80,37 @@ namespace FormApi.Migrations
                     BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     RelativeType = table.Column<int>(type: "integer", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    FormId = table.Column<Guid>(type: "uuid", nullable: true)
+                    FormEntityId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Relatives", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Relatives_Forms_FormId",
-                        column: x => x.FormId,
+                        name: "FK_Relatives_Forms_FormEntityId",
+                        column: x => x.FormEntityId,
                         principalTable: "Forms",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PhoneRecords_FormId",
-                table: "PhoneRecords",
-                column: "FormId");
+                name: "IX_Forms_CandidateId",
+                table: "Forms",
+                column: "CandidateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relatives_FormId",
+                name: "IX_PhoneRecords_FormEntityId",
+                table: "PhoneRecords",
+                column: "FormEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Relatives_FormEntityId",
                 table: "Relatives",
-                column: "FormId");
+                column: "FormEntityId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Candidates");
-
             migrationBuilder.DropTable(
                 name: "PhoneRecords");
 
@@ -110,6 +119,9 @@ namespace FormApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Forms");
+
+            migrationBuilder.DropTable(
+                name: "Candidates");
         }
     }
 }

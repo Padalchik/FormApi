@@ -16,7 +16,6 @@ namespace FormApi
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
             {

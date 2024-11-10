@@ -8,11 +8,12 @@ namespace FormApi.Mappers
         public static FormEntity ToEntity(FormModel formModel)
         {
             var formEntity = new FormEntity();
+            formEntity.Candidate  = formModel.Candidate;
             formEntity.FirstName  = formModel.FirstName;
             formEntity.LastName   = formModel.LastName;
             formEntity.MiddleName = formModel.MiddleName;
 
-            formModel.PhoneRecords.Select(q => q.Id).ToList().ForEach(id => formEntity.PhoneRecords.Add(id));
+            formModel.PhoneRecords.ToList().ForEach(pr => formEntity.PhoneRecords.Add(pr));
             //Relative
 
             return formEntity;

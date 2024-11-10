@@ -7,6 +7,6 @@ namespace FormApi.Abstractions
         Task<List<FormEntity>> GetAllForm();
         Task<FormEntity> GetFormById(Guid id);
         Task<Guid> CreateForm(Guid candidateId);
-        Task<Guid> DeleteForm(Guid id);
+        Task DeleteForm(Guid id);
     }
 }

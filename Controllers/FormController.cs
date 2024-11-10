@@ -1,5 +1,4 @@
 ﻿using FormApi.Abstractions;
-using FormApi.Contracts;
 using FormApi.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,9 +39,10 @@ namespace FormApi.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<Guid>> DeleteForm(Guid id)
+        public async Task<ActionResult> DeleteForm(Guid id)
         {
-            return Ok(await _formService.DeleteForm(id));
+            await _formService.DeleteForm(id);
+            return Ok();
         }
     }
 }
