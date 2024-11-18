@@ -1,5 +1,6 @@
 ﻿using FormApi.Abstractions;
 using FormApi.Entities;
+using FormApi.Mappers;
 
 namespace FormApi.Services
 {
@@ -18,13 +19,15 @@ namespace FormApi.Services
         {
             var phoneRecord = await CreatePhoneRecord(formId, phoneNumber, type, model);
 
-            var form = await _formRepository.GetFormById(formId);
-            if (form == null)
+            var formEntity = await _formRepository.GetFormById(formId);
+            if (formEntity == null)
                 throw new InvalidOperationException("Анкета не найдена");
 
-            form.AddPhoneRecord(phoneRecord);
+            //РАЗВЕ ТУТ НЕ МОЖЕТ БЫТЬ СИТУАЦИИ, ЧТО В ОЗУ БУДЕТ ДВЕ ОДИНАКОВЫЕ FORM_MODEL но ПОД РАЗНЫМИ ССЫЛКАМИ??
+            var formModel = FormMapper.ToModel(formEntity);
+            formModel.AddPhoneRecord(phoneRecord);
 
-            await _formRepository.Update(form);
+            //await _formRepository.Update(form);
         }
 
         public Task DeletePhoneRecordFromForm(Guid formId, Guid phoneRecordId)

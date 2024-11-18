@@ -1,28 +1,42 @@
 ﻿using FormApi.Entities;
+using FormApi.Models;
 
 namespace FormApi.Mappers
 {
     public static class RelativeMapper
     {
-        public static Entities.Relative ToEntity(Models.Relative relativeModel)
+        public static RelativeEntity ToEntity(RelativeModel relativeModel)
         {
-            var relativeEntity = new Entities.Relative
+            var relativeEntity = new RelativeEntity
             {
-                FirstName    = relativeModel.FirstName,
-                LastName     = relativeModel.LastName,
-                MiddleName   = relativeModel.MiddleName,
-                BirthDate    = relativeModel.BirthDate.ToUniversalTime(),
+                Form = FormMapper.ToEntity(relativeModel.Form),
+                FirstName = relativeModel.FirstName,
+                LastName = relativeModel.LastName,
+                MiddleName = relativeModel.MiddleName,
+                BirthDate = relativeModel.BirthDate.ToUniversalTime(),
                 RelativeType = relativeModel.RelativeType
             };
 
             return relativeEntity;
         }
 
-        public static Models.Relative ToModel(Form form, Entities.Relative relativeEntity)
+        public static RelativeModel ToModel(FormModel formModel, RelativeEntity relativeEntity)
         {
-            var relativeModel = new Models.Relative(form, relativeEntity.FirstName, relativeEntity.LastName, relativeEntity.MiddleName, relativeEntity.RelativeType);
+            var createRelativeParams = new Dictionary<string, object>();
+            createRelativeParams.Add("FirstName", relativeEntity.FirstName);
+            createRelativeParams.Add("LastName", relativeEntity.LastName);
+            createRelativeParams.Add("MiddleName", relativeEntity.MiddleName);
+            createRelativeParams.Add("RelativeType", relativeEntity.RelativeType);
 
-            return relativeModel;
+            var relativeAnswer = RelativeModel.Create(formModel, createRelativeParams);
+
+            if (String.IsNullOrEmpty(relativeAnswer.Error) == false)
+                throw new Exception(relativeAnswer.Error);
+
+            if ( relativeAnswer.RelativeModel == null )
+                throw new Exception("Не найден `RelativeModel`");
+
+            return relativeAnswer.RelativeModel;
         }
     }
 }
