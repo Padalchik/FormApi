@@ -16,17 +16,28 @@ namespace FormApi.Services
             _formRepository = formRepository;
         }
 
-        public async Task<Guid> CreateRelative(Guid formId, string firstName, string lastName, string middleName, RelativeType relativeType)
+        public async Task<Guid> CreateRelative(Guid formId, Dictionary<string, object> relativeParams)
         {
-            var form = _formRepository.GetFormById(formId).Result;
+            if (formId == Guid.Empty)
+                return Guid.Empty;
 
-            var relative = new Models.Relative(form, firstName, lastName, middleName, relativeType);
+            if (await _formRepository.GetFormById(formId) is not FormEntity formEntity)
+                return Guid.Empty;
 
-            var relativeId = form.AddRelative(relative);
+            var formModel  = FormMapper.ToModel(formEntity);
 
-            await _formRepository.Update(form);
+            var relativeAnswer = RelativeModel.Create(formModel, relativeParams);
 
-            return relativeId;
+            if (string.IsNullOrEmpty(relativeAnswer.Error) == false)
+                throw new Exception(relativeAnswer.Error);
+
+            if (relativeAnswer.RelativeModel is not RelativeModel)
+                throw new Exception("Не найден `RelativeModel`");
+
+            RelativeEntity relativeEntity = RelativeMapper.ToEntity(relativeAnswer.RelativeModel);
+            await _relativeRepository.CreateRelative(relativeEntity);
+
+            return relativeEntity.Id;
         }
     }
 }

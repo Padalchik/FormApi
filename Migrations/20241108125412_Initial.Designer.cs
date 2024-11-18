@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FormApi.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241101181951_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241108125412_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace FormApi.Migrations
                     b.ToTable("Candidates");
                 });
 
-            modelBuilder.Entity("FormApi.Entities.Form", b =>
+            modelBuilder.Entity("FormApi.Entities.FormEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,6 +59,9 @@ namespace FormApi.Migrations
 
                     b.Property<Guid>("CandidateId")
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -74,6 +77,8 @@ namespace FormApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CandidateId");
+
                     b.ToTable("Forms");
                 });
 
@@ -83,7 +88,7 @@ namespace FormApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("FormId")
+                    b.Property<Guid?>("FormEntityId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Model")
@@ -102,7 +107,7 @@ namespace FormApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormId");
+                    b.HasIndex("FormEntityId");
 
                     b.ToTable("PhoneRecords");
                 });
@@ -123,7 +128,7 @@ namespace FormApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("FormId")
+                    b.Property<Guid?>("FormEntityId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("LastName")
@@ -142,26 +147,37 @@ namespace FormApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FormId");
+                    b.HasIndex("FormEntityId");
 
                     b.ToTable("Relatives");
                 });
 
+            modelBuilder.Entity("FormApi.Entities.FormEntity", b =>
+                {
+                    b.HasOne("FormApi.Entities.Candidate", "Candidate")
+                        .WithMany()
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Candidate");
+                });
+
             modelBuilder.Entity("FormApi.Entities.PhoneRecord", b =>
                 {
-                    b.HasOne("FormApi.Entities.Form", null)
+                    b.HasOne("FormApi.Entities.FormEntity", null)
                         .WithMany("PhoneRecords")
-                        .HasForeignKey("FormId");
+                        .HasForeignKey("FormEntityId");
                 });
 
             modelBuilder.Entity("FormApi.Entities.Relative", b =>
                 {
-                    b.HasOne("FormApi.Entities.Form", null)
+                    b.HasOne("FormApi.Entities.FormEntity", null)
                         .WithMany("Relatives")
-                        .HasForeignKey("FormId");
+                        .HasForeignKey("FormEntityId");
                 });
 
-            modelBuilder.Entity("FormApi.Entities.Form", b =>
+            modelBuilder.Entity("FormApi.Entities.FormEntity", b =>
                 {
                     b.Navigation("PhoneRecords");
 

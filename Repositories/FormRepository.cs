@@ -13,43 +13,38 @@ namespace FormApi.Repositories
             _context = dbcontext;
         }
 
-        public async Task<List<Form>> Get()
+        public async Task<List<FormEntity>> Get()
         {
             var allForm = await _context.Forms.ToListAsync();
 
             return allForm;
         }
 
-        public async Task<Form> GetFormById(Guid formId)
+        public async Task<FormEntity?> GetFormById(Guid formId)
         {
             var form = await _context.Forms.FindAsync(formId);
             return form;
         }
 
-        public async Task<Guid> Create(Form form)
+        public async Task<Guid> Create(FormEntity form)
         {
+            form.CreateDate = DateTime.UtcNow;
+
             await _context.Forms.AddAsync(form);
             await _context.SaveChangesAsync();
 
             return form.Id;
         }
 
-        public async Task<Guid> Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             var formsToDelete = _context.Forms.Where(c => c.Id == id);
 
-            if (formsToDelete.Any())
-            {
+            foreach (var form in formsToDelete)
                 await formsToDelete.ExecuteDeleteAsync();
-                return id;
-            }
-            else
-            {
-                throw new Exception();
-            }
         }
 
-        public async Task Update(Form form)
+        public async Task Update(FormEntity form)
         {
             _context.Forms.Update(form);
             await _context.SaveChangesAsync();
